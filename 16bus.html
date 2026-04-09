@@ -309,7 +309,7 @@ const ROUTE_TO_CITY = [
   { name: "Автовокзал", leg: 3 }
 ];
 
-const ROUTE_TO_DRUZHBA = [
+const ROUTE_FROM_CITY = [
   { name: "Автовокзал", leg: 0 }, 
   { name: "Педагогический университет", leg: 3 }, 
   { name: "пл. Кирова", leg: 2 },
@@ -348,7 +348,7 @@ const SCHEDULES = {
       { g: 5, times: ["06:25","08:05","09:45","13:05","14:45","16:25","18:05","19:45"] },
       { g: 6, times: ["06:40","08:20","10:00","11:40","15:00","16:40","18:20","20:00"] }
     ],
-    to_druzhba: [
+    from_city: [
       { g: 1, times: ["06:15","07:50","11:10","12:50","14:30","16:10","17:50","19:30","21:10"] },
       { g: 2, times: ["06:30","08:10","09:50","13:10","14:50","16:30","18:10"] },
       { g: 3, times: ["06:45","08:25","11:45","13:25","15:05","16:45","18:25","20:05"] },
@@ -365,7 +365,7 @@ const SCHEDULES = {
       { g: 4, times: ["06:10","07:50","09:30","12:50","14:30","16:10","17:50","19:30"] },
       { g: 5, times: ["06:25","08:10","09:50","11:30","14:50","16:30","18:10"] }
     ],
-    to_druzhba: [
+    from_city: [
       { g: 1, times: ["06:00","07:40","09:20","12:40","14:20","16:00","17:40","19:20","21:00"] },
       { g: 2, times: ["06:20","08:00","11:20","13:00","14:40","16:20","18:00"] },
       { g: 3, times: ["06:40","08:20","10:00","13:20","15:00","16:40","18:20","20:00"] },
@@ -411,7 +411,7 @@ function getBaseDate() {
 
 // ========== РАБОТА С МАРШРУТАМИ ==========
 function getStopsWithTime() {
-  let route = state.dir === 'to_city' ? ROUTE_TO_CITY : ROUTE_TO_DRUZHBA;
+  let route = state.dir === 'to_city' ? ROUTE_TO_CITY : ROUTE_FROM_CITY;
   let cumulative = 0;
   
   return route.map((stop, idx) => {
@@ -581,7 +581,7 @@ function setDay(d) {
 }
 
 function swapDirection() {
-  state.dir = state.dir === 'to_city' ? 'to_druzhba' : 'to_city';
+  state.dir = state.dir === 'to_city' ? 'from_city' : 'to_city';
   document.getElementById('fromText').innerText = state.dir === 'to_city' ? 'Дружба' : 'Автовокзал';
   document.getElementById('toText').innerText = state.dir === 'to_city' ? 'Автовокзал' : 'Дружба';
   
